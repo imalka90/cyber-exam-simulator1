@@ -1,0 +1,42 @@
+async function handleLogin() {
+    const username = document.getElementById('user-id').value;
+    const passkey = document.getElementById('user-pass').value;
+
+    const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, passkey })
+    });
+
+    if (res.ok) {
+        modal.innerText = "ACCESS GRANTED... LOADING EXAM";
+        modal.style.display = 'block';
+        // Ensure this filename matches your current file exactly
+        setTimeout(() => { window.location.href = "Q_and_A_with_explanations.html"; }, 1500);
+    } else {
+        alert("LOGIN FAILED: INVALID CREDENTIALS");
+    }
+}
+
+// In your registration form submit listener:
+const handleRegister = async (e) => {
+    e.preventDefault();
+    const username = e.target.querySelector('input[type="text"]').value;
+    const contact = document.getElementById('reg-contact').value;
+    const passkey = prompt("Create your secret Passkey:");
+
+    if(!passkey) return;
+
+    const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, passkey, contact })
+    });
+
+    if (res.ok) {
+        alert("Registration Successful! Please log in.");
+        openLogin();
+    } else {
+        alert("Error: User may already exist.");
+    }
+};

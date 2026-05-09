@@ -1,0 +1,7 @@
+name = "cyber-exam-simulator1"
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "cyber-db"
+database_id = "ad53a474-5923-4c7f-b33d-5b6c19e7790c"
